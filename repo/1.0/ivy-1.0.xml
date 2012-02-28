@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+<ivy-module version="1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
 
-	<info organisation="trylogic" module="Insulin" revision="1.0" status="integration" publication="20120228212419"/>
+	<info organisation="trylogic" module="Insulin" revision="1.0" status="integration" publication="20120228215448"/>
 
 	<publications>
 		<artifact name="Insulin" type="swc" ext="swc"/>
