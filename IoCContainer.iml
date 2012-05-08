@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="Flex" version="4">
   <component name="Flex.Build.Configuration">
-    <option name="OUTPUT_TYPE" value="Library" />
-    <option name="OUTPUT_FILE_NAME" value="IoCContainer.swc" />
-    <option name="TARGET_PLAYER_VERSION" value="10.2.0" />
-    <option name="NAMESPACE_AND_MANIFEST_FILE_INFO_LIST">
-      <list>
-        <NamespaceAndManifestFileInfo>
-          <option name="NAMESPACE" value="http://www.trylogic.ru/ioc/" />
-          <option name="MANIFEST_FILE_PATH" value="$MODULE_DIR$/ioc-manifest.xml" />
-        </NamespaceAndManifestFileInfo>
-      </list>
-    </option>
     <option name="VERSION" value="3" />
+  </component>
+  <component name="FlexBuildConfigurationManager" active="IoCContainer">
+    <configurations>
+      <configuration name="IoCContainer" output-type="Library" output-file="IoCContainer.swc" output-folder="$MODULE_DIR$/../out/production/IoCContainer" skip-build="true">
+        <dependencies target-player="11.1">
+          <entries>
+            <entry module-name="TrylogicUtils" build-configuration-name="TrylogicUtils">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="flex_sdk_4.6.0.23201_mpl+AIR3.2" />
+        </dependencies>
+        <compiler-options>
+          <map>
+            <entry key="compiler.namespaces.namespace" value="http://www.trylogic.ru/ioc/&#9;/Users/bsideup/Dropbox/Work/ActionScript/-=GitHub=-/TrylogicFramework/InsulinGitHub/ioc-manifest.xml" />
+          </map>
+        </compiler-options>
+        <packaging-air-desktop />
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
+    </configurations>
+    <compiler-options />
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
@@ -20,11 +32,9 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="flex_sdk_4.6.0.23201_mpl+AIR3.2" jdkType="__CompositeFlexSdk__" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="TrylogicUtils" />
-    <orderEntry type="library" name="FlexUnit" level="project" />
-    <orderEntry type="library" name="FlexUnit" level="project" />
   </component>
 </module>
 

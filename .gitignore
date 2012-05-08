@@ -1,6 +1,7 @@
-
 /out
 /lib
 /sdk
 /build.ivy.xml
-/ivysettings.xml
+/build.flexsdk.xml
+/ivysettings.github.xml
+/ivysettings.publish.local.xml

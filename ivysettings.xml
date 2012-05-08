@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivysettings>
+	<settings defaultResolver="default" />
+	<include file="ivysettings.github.xml"/>
+	<include file="ivysettings.publish.local.xml"/>
+
+	<resolvers>
+		<chain name="default" returnFirst="true">
+			<resolver ref="github" />
+		</chain>
+	</resolvers>
+</ivysettings>
