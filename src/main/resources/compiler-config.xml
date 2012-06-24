@@ -1,0 +1,1 @@
+<flex-config xmlns="http://www.adobe.com/2006/flex-config">	<include-classes>		<class>tl.factory.SingletonFactory</class>	</include-classes>	<compiler>		<keep-as3-metadata append="true">			<name>Injection</name>		</keep-as3-metadata>	</compiler></flex-config>
