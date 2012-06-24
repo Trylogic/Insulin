@@ -1,7 +1,6 @@
-/out
-/lib
-/sdk
-/build.ivy.xml
-/build.flexsdk.xml
-/ivysettings.github.xml
-/ivysettings.publish.local.xml
+.DS_Store
+.idea/
+*.iws
+*.iml
+*.ipr
+target/
