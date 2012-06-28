@@ -1,5 +1,6 @@
 package tl.factory
 {
+
 	import org.flexunit.asserts.assertEquals;
 
 	public class SingletonFactoryTest

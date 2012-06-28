@@ -1,5 +1,6 @@
 package tl.ioc
 {
+
 	import flash.display.IBitmapDrawable;
 	import flash.display.Sprite;
 	import flash.media.Sound;
@@ -11,7 +12,7 @@ package tl.ioc
 
 	public class IOCHelperTest
 	{
-		[Injection]
+		[Inject]
 		public var sprite : IBitmapDrawable;
 
 		[Test]
