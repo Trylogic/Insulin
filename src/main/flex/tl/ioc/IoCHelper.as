@@ -126,7 +126,16 @@ package tl.ioc
 					resolvedInstance[String( @name )] = resolve( getDefinitionByName( @type ), resolvedInstance )
 					);
 
-			describeType( resolvedInstance ).accessor.(@access != "readonly").(valueOf().metadata.(@name == INJECTION_TAG).length()).(
+			describeTypeCached( resolvedInstance ).accessor.(@access != "readonly").(valueOf().metadata.(@name == INJECTION_TAG).length()).(
+					resolvedInstance[String( @name )] = resolve( getDefinitionByName( @type ), resolvedInstance )
+					);
+
+			resolvedInstance = Object(resolvedInstance ).constructor;
+			describeTypeCached( resolvedInstance ).variable.(valueOf().metadata.(@name == INJECTION_TAG).length()).(
+					resolvedInstance[String( @name )] = resolve( getDefinitionByName( @type ), resolvedInstance )
+					);
+
+			describeTypeCached( resolvedInstance ).accessor.(@access != "readonly").(valueOf().metadata.(@name == INJECTION_TAG).length()).(
 					resolvedInstance[String( @name )] = resolve( getDefinitionByName( @type ), resolvedInstance )
 					);
 		}
