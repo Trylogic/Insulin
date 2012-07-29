@@ -3,6 +3,8 @@ package tl.ioc
 
 	import flash.utils.*;
 
+	import tl.factory.SingletonFactory;
+
 	import tl.ioc.mxml.Associate;
 	import tl.ioc.mxml.GroupAssociate;
 	import tl.ioc.mxml.IAssociate;
@@ -150,6 +152,18 @@ package tl.ioc
 		public static function registerType( iface : Class, targetClass : Class, factory : Class = null ) : void
 		{
 			registerAssociate( new Associate( iface, targetClass, factory ) );
+		}
+
+		/**
+		 * Associate iface with it's singleton implementation targetClass
+		 *
+		 * @param iface
+		 * @param implementation
+		 */
+		public static function registerSingleton( iface : Class, implementation : Object) : void
+		{
+			registerAssociate( new Associate( iface, iface, SingletonFactory ) );
+			SingletonFactory.registerImplementation(iface, implementation);
 		}
 
 		/**
