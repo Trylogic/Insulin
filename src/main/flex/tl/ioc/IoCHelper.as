@@ -62,6 +62,8 @@ package tl.ioc
 	{
 		public static const INJECTION_TAG : String = "Inject";
 		private static const aliases : Dictionary = new Dictionary();
+		private static const injectsByObject : Dictionary = new Dictionary();
+		private static const injectsByClass : Dictionary = new Dictionary();
 
 		{
 			if ( describeTypeCached( IoCHelper )..metadata.(@name == INJECTION_TAG).length() == 0 )
@@ -124,22 +126,37 @@ package tl.ioc
 		 */
 		public static function injectTo( resolvedInstance : Object ) : void
 		{
-			describeTypeCached( resolvedInstance ).variable.(valueOf().metadata.(@name == INJECTION_TAG).length()).(
-					resolvedInstance[String( @name )] = resolve( getDefinitionByName( @type ), resolvedInstance )
-					);
+			var injects : Vector.<InjectDescription>;
+			var injectsCollection : Dictionary = resolvedInstance is Class ? injectsByClass : injectsByObject;
 
-			describeTypeCached( resolvedInstance ).accessor.(@access != "readonly").(valueOf().metadata.(@name == INJECTION_TAG).length()).(
-					resolvedInstance[String( @name )] = resolve( getDefinitionByName( @type ), resolvedInstance )
-					);
+			if ( !(resolvedInstance is Class) )
+			{
+				const resolvedInstanceConstructor : Class = (resolvedInstance as Object).constructor;
+				injectTo( resolvedInstanceConstructor );
+			}
 
-			resolvedInstance = Object(resolvedInstance ).constructor;
-			describeTypeCached( resolvedInstance ).variable.(valueOf().metadata.(@name == INJECTION_TAG).length()).(
-					resolvedInstance[String( @name )] = resolve( getDefinitionByName( @type ), resolvedInstance )
-					);
+			injects = injectsCollection[resolvedInstance];
 
-			describeTypeCached( resolvedInstance ).accessor.(@access != "readonly").(valueOf().metadata.(@name == INJECTION_TAG).length()).(
-					resolvedInstance[String( @name )] = resolve( getDefinitionByName( @type ), resolvedInstance )
-					);
+			if ( injects == null )
+			{
+				injects = new Vector.<InjectDescription>();
+				const instanceDescription : XML = describeTypeCached( resolvedInstance );
+				instanceDescription.variable.(valueOf().metadata.(@name == INJECTION_TAG).length()).(
+						injects.push( new InjectDescription( @name, getDefinitionByName( @type ) as Class ) )
+						);
+
+				instanceDescription.accessor.(@access != "readonly").(valueOf().metadata.(@name == INJECTION_TAG).length()).(
+						injects.push( new InjectDescription( String( @name ), getDefinitionByName( String( @type ) ) as Class ) )
+						);
+
+				injectsCollection[resolvedInstance] = injects;
+			}
+
+			for each( var injectDescription : InjectDescription in injects )
+			{
+				resolvedInstance[injectDescription.name] = resolve( injectDescription.type, resolvedInstance );
+			}
+
 		}
 
 		/**
@@ -160,10 +177,10 @@ package tl.ioc
 		 * @param iface
 		 * @param implementation
 		 */
-		public static function registerSingleton( iface : Class, implementation : Object) : void
+		public static function registerSingleton( iface : Class, implementation : Object ) : void
 		{
 			registerAssociate( new Associate( iface, iface, SingletonFactory ) );
-			SingletonFactory.registerImplementation(iface, implementation);
+			SingletonFactory.registerImplementation( iface, implementation );
 		}
 
 		/**
