@@ -26,9 +26,12 @@
 				<version>${flexmojos.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-					<storepass />
+					<storepass/>
 					<skipTests>true</skipTests>
 					<skipTest>true</skipTest>
+					<includeClasses>
+						<include>tl.factory.ConstructorFactory</include>
+					</includeClasses>
 					<loadConfigs>
 						<config>src/main/resources/compiler-config.xml</config>
 					</loadConfigs>
