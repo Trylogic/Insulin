@@ -4,7 +4,6 @@ package tl.ioc
 	import flash.utils.*;
 
 	import tl.factory.SingletonFactory;
-
 	import tl.ioc.mxml.Associate;
 	import tl.ioc.mxml.GroupAssociate;
 	import tl.ioc.mxml.IAssociate;
@@ -12,7 +11,7 @@ package tl.ioc
 
 	[Inject]
 	/**
-	 * Basic IoC container.
+	 * Basic IoC.
 	 *
 	 * @example
 	 * <listing version="3.0">
@@ -81,7 +80,7 @@ package tl.ioc
 		 * @param instance    Optional instance, passed to <code>getInstanceForInstance</code> function of implementation Class
 		 * @return            iface implementator
 		 */
-		public static function resolve( iface : Class, instance : * = null ) : *
+		public static function resolve( iface : Class, instance : * ) : *
 		{
 			var assoc : Associate = aliases[iface];
 			var resolvedInstance : *;
