@@ -20,7 +20,7 @@ package tl.ioc
 		{
 			IoCHelper.registerType( IBitmapDrawable, Sprite );
 
-			assertTrue( IoCHelper.resolve( IBitmapDrawable ) is Sprite );
+			assertTrue( IoCHelper.resolve( IBitmapDrawable, this ) is Sprite );
 		}
 
 		[Test]
@@ -35,14 +35,14 @@ package tl.ioc
 		{
 			IoCHelper.registerType( IBitmapDrawable, Sprite, SingletonFactory );
 
-			assertEquals( IoCHelper.resolve( IBitmapDrawable ), IoCHelper.resolve( IBitmapDrawable ) );
+			assertEquals( IoCHelper.resolve( IBitmapDrawable, this ), IoCHelper.resolve( IBitmapDrawable, this ) );
 		}
 
 		[Test]
 		public function testInjection() : void
 		{
 			IoCHelper.registerType( IBitmapDrawable, Sprite );
-			IoCHelper.injectTo( this );
+			sprite = IoCHelper.resolve( IBitmapDrawable, this );
 			assertTrue( sprite != null );
 			assertTrue( sprite is Sprite );
 		}

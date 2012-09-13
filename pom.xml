@@ -31,6 +31,7 @@
 					<skipTest>true</skipTest>
 					<includeClasses>
 						<include>tl.factory.ConstructorFactory</include>
+						<include>tl.ioc.IoCHelper</include>
 					</includeClasses>
 					<loadConfigs>
 						<config>src/main/resources/compiler-config.xml</config>

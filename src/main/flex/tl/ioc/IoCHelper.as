@@ -7,9 +7,7 @@ package tl.ioc
 	import tl.ioc.mxml.Associate;
 	import tl.ioc.mxml.GroupAssociate;
 	import tl.ioc.mxml.IAssociate;
-	import tl.utils.describeTypeCached;
 
-	[Inject]
 	/**
 	 * Basic IoC.
 	 *
@@ -59,17 +57,7 @@ package tl.ioc
 	 */
 	public class IoCHelper
 	{
-		public static const INJECTION_TAG : String = "Inject";
 		private static const aliases : Dictionary = new Dictionary();
-		private static const injectsByObject : Dictionary = new Dictionary();
-		private static const injectsByClass : Dictionary = new Dictionary();
-
-		{
-			if ( describeTypeCached( IoCHelper )..metadata.(@name == INJECTION_TAG).length() == 0 )
-			{
-				throw new Error( "Please add -keep-as3-metadata+=" + INJECTION_TAG + " to flex compiler arguments!" )
-			}
-		}
 
 		/**
 		 * Return instance for passed iface.
@@ -114,48 +102,6 @@ package tl.ioc
 			}
 
 			return resolvedInstance;
-		}
-
-
-		/**
-		 * Process injections on target
-		 *
-		 * @param resolvedInstance    target
-		 * @param forInstance        optional and for internal use
-		 */
-		public static function injectTo( resolvedInstance : Object ) : void
-		{
-			var injects : Vector.<InjectDescription>;
-			var injectsCollection : Dictionary = resolvedInstance is Class ? injectsByClass : injectsByObject;
-
-			if ( !(resolvedInstance is Class) )
-			{
-				const resolvedInstanceConstructor : Class = (resolvedInstance as Object).constructor;
-				injectTo( resolvedInstanceConstructor );
-			}
-
-			injects = injectsCollection[resolvedInstance];
-
-			if ( injects == null )
-			{
-				injects = new Vector.<InjectDescription>();
-				const instanceDescription : XML = describeTypeCached( resolvedInstance );
-				instanceDescription.variable.(valueOf().metadata.(@name == INJECTION_TAG).length()).(
-						injects.push( new InjectDescription( @name, getDefinitionByName( @type ) as Class ) )
-						);
-
-				instanceDescription.accessor.(@access != "readonly").(valueOf().metadata.(@name == INJECTION_TAG).length()).(
-						injects.push( new InjectDescription( String( @name ), getDefinitionByName( String( @type ) ) as Class ) )
-						);
-
-				injectsCollection[resolvedInstance] = injects;
-			}
-
-			for each( var injectDescription : InjectDescription in injects )
-			{
-				resolvedInstance[injectDescription.name] = resolve( injectDescription.type, resolvedInstance );
-			}
-
 		}
 
 		/**
