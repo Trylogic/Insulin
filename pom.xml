@@ -29,6 +29,8 @@
 					<storepass/>
 					<skipTests>true</skipTests>
 					<skipTest>true</skipTest>
+					<debug>true</debug>
+					<optimize>true</optimize>
 					<includeClasses>
 						<include>tl.factory.ConstructorFactory</include>
 						<include>tl.ioc.IoCHelper</include>
